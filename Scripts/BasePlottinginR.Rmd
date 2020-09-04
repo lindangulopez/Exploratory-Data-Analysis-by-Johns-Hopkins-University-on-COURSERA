@@ -1,0 +1,115 @@
+---
+title: "Base Plotting in R"
+author: "Linda Angulo Lopez"
+date: "04/09/2020"
+output: html_document
+---
+
+There are three key plotting systems in R, the Base, which is a type of artist's palette, model,  a Lattice System, which allows to specify an entire plot specified by one function and the conditioning ggplot2 with mixed elements of Base and Lattice, this is a demo of the base plot.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The Base Plotting System
+
+
+```{r }
+library(datasets)
+data(cars)
+with(cars, plot(speed, dist))
+
+
+```
+
+## Examples for screen device display
+
+- histograms
+
+```{r}
+library(datasets)
+hist(airquality$Ozone) ## Draw a new plot
+
+```
+
+- scatter plots
+
+```{r}
+library(datasets)
+with(airquality, plot(Wind, Ozone))
+
+```
+
+- box plots
+
+```{r}
+library(datasets)
+airquality <- transform(airquality, Month = factor(Month))
+boxplot(Ozone ~ Month, airquality, xlab = "Month", ylab = "Ozone (ppb)")
+```
+
+- add the title
+
+```{r}
+library(datasets)
+with(airquality, plot(Wind, Ozone))
+title(main = "Ozone and Wind in New York City") ## Add a title
+```
+
+- use colour to symbolise
+
+```{r}
+with(airquality, plot(Wind, Ozone, main = "Ozone and Wind in New York City"))
+with(subset(airquality, Month == 5), points(Wind, Ozone, col = "blue"))
+```
+
+
+- Annotate
+
+```{r}
+with(airquality, plot(Wind, Ozone, main = "Ozone and Wind in New York City",
+ type = "n"))
+with(subset(airquality, Month == 5), points(Wind, Ozone, col = "blue"))
+with(subset(airquality, Month != 5), points(Wind, Ozone, col = "red"))
+legend("topright", pch = 1, col = c("blue", "red"), legend = c("May", "Other Months"))
+
+```
+
+-Regression Line
+
+```{r}
+with(airquality, plot(Wind, Ozone, main = "Ozone and Wind in New York City",
+ pch = 20))
+model <- lm(Ozone ~ Wind, airquality)
+abline(model, lwd = 2)
+
+```
+
+
+- Multiple Plots
+
+```{r}
+par(mfrow = c(1, 2))
+with(airquality, {
+ plot(Wind, Ozone, main = "Ozone and Wind")
+ plot(Solar.R, Ozone, main = "Ozone and Solar Radiation")
+})
+
+```
+
+
+- more plots
+
+```{r}
+par(mfrow = c(1, 3), mar = c(4, 4, 2, 1), oma = c(0, 0, 2, 0))
+with(airquality, {
+ plot(Wind, Ozone, main = "Ozone and Wind")
+ plot(Solar.R, Ozone, main = "Ozone and Solar Radiation")
+ plot(Temp, Ozone, main = "Ozone and Temperature")
+ mtext("Ozone and Weather in New York City", outer = TRUE)
+})
+
+```
+
+
+#[by Linda, September 2020 ](https://www.linkedin.com/in/lindangulopez/)
