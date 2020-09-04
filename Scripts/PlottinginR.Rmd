@@ -1,69 +1,51 @@
 ---
-title: "Plotting in R)"
+title: "Plotting in R"
 author: "Linda Angulo Lopez"
 date: "04/09/2020"
 output: html_document
 ---
 
+There are three key plotting systems in R, the Base, which is a type of artist's palette, model,  a Lattice System, which allows to specify an entire plot specified by one function and the conditioning ggplot2 with mixed elements of Base and Lattice.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Plotting in R:
+
+- The Base Plotting System
 
 
-```{r cars}
-summary(cars)
+```{r }
+library(datasets)
+data(cars)
+with(cars, plot(speed, dist))
+
 ```
 
-## Including Plots
+##  Lattice Plot
 
 
-```{r cars}
-summary(cars)
+```{r }
+library(lattice)
+state <- data.frame(state.x77, region = state.region)
+xyplot(Life.Exp ~ Income | region, data = state, layout = c(4, 1))
+
+
 ```
 
-## Including Plots
+## The ggplot2 System
 
 
-```{r cars}
-summary(cars)
+```{r }
+
+library(ggplot2)
+data(mpg)
+qplot(displ, hwy, data = mpg)
+
 ```
 
-## Including Plots
 
 
-```{r cars}
-summary(cars)
-```
 
-## Including Plots
-
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#[by Linda, September 2020 ](https://www.linkedin.com/in/lindangulopez/)
