@@ -10,3 +10,4 @@ SKILLS YOU WILL GAIN: ` Cluster Analysis - Ggplot2 - R Programming - Exploratory
 
 There are three key plotting systems in R, the [Base](https://rpubs.com/lindangulopez/656288), which is a type of artist's palette, model,  a Lattice System, which allows to specify an entire plot specified by one function and the conditioning ggplot2 with mixed elements of Base and Lattice.
 
+[Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, 
