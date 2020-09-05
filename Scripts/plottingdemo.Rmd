@@ -1,0 +1,185 @@
+---
+title: "Graphic Devices & Base plotting"
+author: "Linda Angulo Lopez"
+date: "05/09/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Base Plotting in R:
+
+- A utomatically labels
+
+```{r }
+x <-rnorm(100)
+hist(x)
+
+
+```
+
+- Default open circles for scatter plots
+- no title
+- axis labeled
+- automatic margins
+
+```{r }
+
+y <- rnorm(100)
+plot(x,y)
+```
+
+
+- use mar() to adjust margins
+
+```{r }
+par(mar=c(4,4,1,15))
+plot(x,y)
+
+```
+
+- Change the shape of the points with pch()
+
+```{r }
+par(mar=c(15,4,4,4))
+plot(x,y,pch=21, col="blue", cex =1.5, bg = "green") # filled circles
+#plot(x,y,pch=20) # filled circles
+#plot(x,y,pch=15) # filled squares
+#plot(x,y,pch=10) #diamonds with crosses
+#plot(x,y,pch=5) #open diamonds
+#plot(x,y,pch=4) # x signs 
+#plot(x,y,pch=3) # + signs
+#plot(x,y,pch=2) # triangles
+#plot(x,y,pch=1) # open circles
+
+```
+
+
+- style the graph
+
+```{r }
+par(mar=c(6,6,6,6))
+plot(x, xlab ="weight", y, ylab="height", main="Scatterplot demo", pch=24, col="red", cex =0.75, bg = "green")
+#title("scatterplot")
+text(-2,-2,"label")
+legend("topright", legend="legend", pch=24, col="red", cex =0.75, bg = "green")
+fit <-lm(y~x)
+abline(fit, lwd=1.5, col="red")
+
+
+```
+
+- change margins
+
+```{r }
+z<-rpois(100,2)
+par(mfrow=c(2,1))
+plot(x,y)
+plot(x,z)
+```
+
+
+
+```{r }
+
+par(mar=c(4,4,2,2))
+par(mfrow=c(1,2))
+plot(x,y)
+plot(x,z)
+
+```
+
+- plot multiple by mfrow()
+
+```{r }
+par(mar=c(4,4,2,2))
+par(mfrow=c(4,2))
+plot(x,y)
+plot(x,z)
+plot(x,x)
+plot(y, x)
+plot(y,y)
+plot(y,z)
+plot(z,x)
+plot(z,y)
+```
+
+
+- plot multiple by mfcol()
+
+```{r }
+
+par(mar=c(4,4,2,2))
+par(mfcol=c(4,2))
+plot(x,y)
+plot(x,z)
+plot(x,x)
+plot(y, x)
+plot(y,y)
+plot(y,z)
+plot(z,x)
+plot(z,y)
+```
+
+- Annotating groups of data
+
+```{r }
+par(mfrow =c(1,1))
+x<-rnorm(100)
+y<-x+rnorm(100)
+#2 groups
+g <- gl(2,50, labels=c("Males", "Females"))
+str(g)
+
+
+```
+
+
+
+```{r }
+plot(x, y)
+plot(x, y, type = "n")
+points(x[g == "Males"], y[g == "Males"], col= "red")
+points(x[g == "Females"], y[g == "Females"], col= "green")
+legend("topleft", pch = 1, col = c("red", "green"), legend = c("Males", "Females"))
+
+```
+
+## Graphic Devices in R:
+
+- plot on screen
+
+```{r}
+library(datasets)
+with(faithful, plot(eruptions, waiting)) ## Make plot appear on screen device
+title(main = "Old Faithful Geyser data") ## Annotate with a title
+```
+
+- plot on file
+
+```{r}
+pdf(file = "myplot.pdf") ## Open PDF device; create 'myplot.pdf' in my working directory
+## Create plot and send to a file (no plot appears on screen)
+with(faithful, plot(eruptions, waiting))
+title(main = "Old Faithful Geyser data") ## Annotate plot; still nothing on screen
+dev.off() ## Close the PDF file device
+## Now you can view the file 'myplot.pdf' on your computer
+
+```
+
+- copy plot
+
+```{r}
+library(datasets)
+with(faithful, plot(eruptions, waiting)) ## Create plot on screen device
+title(main = "Old Faithful Geyser data") ## Add a main title
+dev.copy(png, file = "geyserplot.png") ## Copy my plot to a PNG file
+dev.off() ## Don't forget to close the PNG device!
+
+```
+-
+
+
+#[by Linda, September 2020 ](https://www.linkedin.com/in/lindangulopez/)
