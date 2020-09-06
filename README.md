@@ -10,9 +10,9 @@ SKILLS YOU WILL GAIN: ` Cluster Analysis - Ggplot2 - R Programming - Exploratory
 
 There are three key plotting systems in R, the [Base](https://rpubs.com/lindangulopez/656288), which is a type of artist's palette, model,  a Lattice System, which allows to specify an entire plot specified by one function and the conditioning ggplot2 with mixed elements of Base and Lattice.
 
-[Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, the first assignment used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption.
+[Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, the first assignment used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption Data Set”
 
-Data Set”: [Dataset](https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip): Electric power consumption [20Mb]
+### [Dataset](https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip): Electric power consumption [20Mb]
 Description: Measurements of electric power consumption in one household with a one-minute sampling rate over a period of almost 4 years. Different electrical quantities and some sub-metering values are available.
 The following descriptions of the 9 variables in the dataset are taken from the UCI web site:
 - https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption
