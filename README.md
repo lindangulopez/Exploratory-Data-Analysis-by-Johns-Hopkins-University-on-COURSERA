@@ -33,24 +33,23 @@ Alice Berard, TELECOM ParisTech Master of Engineering Internship at EDF R&D, Cla
 
 To produce these [four PNG files and four R code files](https://github.com/lindangulopez/ExData_Plotting1).
 
-### Plot 1
+### [function Plot.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot1.R)
 
 
 ![Figure 1: plot of global active power vs frequency](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot1.png) 
 
 
-### Plot 2
+### [function Plot2.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot2.R)
 
 ![Figure 2: global active power by day](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot2.png) 
 
 
-## Plot 3
+## [function Plot3.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot3.R)
 
 ![Figure 3: energy sub metering by day](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot3.png) 
 
-R code 
 
 
-### Plot 4
+### [function Plot4.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot4.R)
 
 ![Figure 4: date times and other plots](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot4.png) 
