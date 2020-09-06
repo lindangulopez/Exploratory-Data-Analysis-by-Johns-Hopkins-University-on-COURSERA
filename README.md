@@ -10,7 +10,7 @@ SKILLS YOU WILL GAIN: ` Cluster Analysis - Ggplot2 - R Programming - Exploratory
 
 There are three key plotting systems in R, the [Base](https://rpubs.com/lindangulopez/656288), which is a type of artist's palette, model,  a Lattice System, which allows to specify an entire plot specified by one function and the conditioning ggplot2 with mixed elements of Base and Lattice.
 
-[Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, the first assignment used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption Data Set”
+[Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, the [first assignment](https://github.com/lindangulopez/ExData_Plotting1/tree/master/figure) used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption Data Set”
 
 ### [Dataset](https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip): Electric power consumption [20Mb]
 Description: Measurements of electric power consumption in one household with a one-minute sampling rate over a period of almost 4 years. Different electrical quantities and some sub-metering values are available.
@@ -30,3 +30,27 @@ Source:
 
 Georges Hebrail (georges.hebrail '@' edf.fr), Senior Researcher, EDF R&D, Clamart, France
 Alice Berard, TELECOM ParisTech Master of Engineering Internship at EDF R&D, Clamart, France
+
+To produce these [four PNG files and four R code files](https://github.com/lindangulopez/ExData_Plotting1).
+
+### Plot 1
+
+
+![Figure 1: plot of global active power vs frequency](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot1.png) 
+
+
+### Plot 2
+
+![Figure 2: global active power by day](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot2.png) 
+
+
+## Plot 3
+
+![Figure 3: energy sub metering by day](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot3.png) 
+
+R code 
+
+
+### Plot 4
+
+![Figure 4: date times and other plots](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot4.png) 
