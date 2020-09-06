@@ -36,7 +36,7 @@ To produce these [four PNG files and four R code files](https://github.com/linda
 ### [function Plot.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot1.R)
 
 
-![Figure 1: plot of global active power vs frequency](https://github.com/lindangulopez/ExData_Plotting1/blob/master/figure/plot1.png) 
+![Figure 1: download link](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/raw/master/ExData_Plotting1/plot1.png) 
 
 
 ### [function Plot2.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot2.R)
