@@ -52,4 +52,4 @@ https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Joh
 
 ### [function Plot4.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot4.R)
 
-![Figure 4: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-CO) 
+![Figure 4: download link](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/ExData_Plotting1/plot4.png?raw=true) 
