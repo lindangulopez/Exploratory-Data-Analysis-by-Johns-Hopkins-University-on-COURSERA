@@ -36,13 +36,13 @@ To produce these [four PNG files and four R code files](https://github.com/linda
 ### [function Plot.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot1.R)
 
 
-[Figure 1: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/figure/plot1.png) 
+![Figure 1: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/figure/plot1.png) 
 https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/figure/plot1.png
 
 
 ### [function Plot2.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot2.R)
 
-[Figure 2: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/plot2.png) 
+![Figure 2: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/plot2.png) 
 
 
 ## [function Plot3.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot3.R)
@@ -52,4 +52,4 @@ https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Joh
 
 ### [function Plot4.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot4.R)
 
-[Figure 4: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/plot4.png) 
+![Figure 4: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-CO) 
