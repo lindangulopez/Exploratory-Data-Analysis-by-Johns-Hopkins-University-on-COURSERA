@@ -12,6 +12,7 @@ There are three key plotting systems in R, the [Base](https://rpubs.com/lindangu
 
 ### “In	brief,	the	grammar	tells	us	that	a	statstcal graphic	is	a	mapping	from	data	to	aesthetc attributes	(colour,	shape,	size)	of	geometric objects	(points,	lines,	bars).	The	plot	may	also contain	statstcal	transforma:ons	of	the	data and	is	drawn	on	a	specific	coordinate	system”  [ggplot2 book](https://ggplot2-book.org/)
 
+### ggplot2 was used to explore a mouse	allergen	and	asthma	cohort	study of children	(aged	5—17) with persistent	asthma, data was collected  5 times, per child, over a year. [Data set: MAACS Cohort](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/datasets/maacs.rda?raw=true)
 
 [Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, the [first assignment](https://github.com/lindangulopez/ExData_Plotting1/tree/master/figure) used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption Data Set”
 
