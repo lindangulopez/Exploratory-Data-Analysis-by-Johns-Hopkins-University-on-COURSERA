@@ -10,10 +10,8 @@ SKILLS YOU WILL GAIN: ` Cluster Analysis - Ggplot2 - R Programming - Exploratory
 
 There are three key plotting systems in R, the [Base](https://rpubs.com/lindangulopez/656288), which is a type of artist's palette, model,  a [Lattice System](http://rpubs.com/lindangulopez/661915), which allows to specify an entire plot specified by one function nd the Grammar	of	Graphics is the "third" graphics	system	for R and is available	from CRAN	via install.packages() 
 
-### “In	brief,	the	grammar	tells	us	that	a	sta:s:cal graphic	is	a	mapping	from	data	to	aesthe/c attributes	(colour,	shape,	size)	of	geometric objects	(points,	lines,	bars).	The	plot	may	also contain	sta:s:cal	transforma:ons	of	the	data and	is	drawn	on	a	specific	coordinate	system”  [ggplot2 book](https://ggplot2-book.org/)
+### “In	brief,	the	grammar	tells	us	that	a	statstcal graphic	is	a	mapping	from	data	to	aesthetc attributes	(colour,	shape,	size)	of	geometric objects	(points,	lines,	bars).	The	plot	may	also contain	statstcal	transforma:ons	of	the	data and	is	drawn	on	a	specific	coordinate	system”  [ggplot2 book](https://ggplot2-book.org/)
 
-
-“In	brief,	the	grammar	tells	us	that	a	sta:s:cal graphic	is	a	mapping	from	data	to	aesthe/c attributes	(colour,	shape,	size)	of	geometric objects	(points,	lines,	bars).	The	plot	may	also contain	sta:s:cal	transforma:ons	of	the	data and	is	drawn	on	a	specific	coordinate	system”  ggplot2 book
 
 [Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, the [first assignment](https://github.com/lindangulopez/ExData_Plotting1/tree/master/figure) used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption Data Set”
 
