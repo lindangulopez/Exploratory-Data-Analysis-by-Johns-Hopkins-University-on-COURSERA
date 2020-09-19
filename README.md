@@ -17,7 +17,7 @@ There are three key plotting systems in R, the [Base](https://rpubs.com/lindangu
 ![library(ggthemes)](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/ggplot2_maacs_finalplot.png?raw=true)
 ![here's Prof.Roger Peng's Rcode](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/ggplot2_maacs_finalplot_code.png?raw=true)
 
-[learn more about ggplot2 here, ...](https://rpubs.com/lindangulopez/662006)
+### [learn more about ggplot2 here, ...](https://rpubs.com/lindangulopez/662006)
 
  Also covered was:
  ## The Lattice Plotting System in R 
@@ -32,7 +32,7 @@ There are three key plotting systems in R, the [Base](https://rpubs.com/lindangu
 ### the lattice system is easy to use and you can quickly produce multiple graphs by splitting the factors with the 
 ![library("gridExtra")](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/latticeMPs.png?raw=true)
 
-### [Learn more about the lattice plot system here, ...](https://rpubs.com/lindangulopez/661915) & [Learn more about the base plot system here, ...](https://rpubs.com/lindangulopez/656288)
+### [Learn more about the lattice plot system here, ...](https://rpubs.com/lindangulopez/661915) & [the base plot system here, ...](https://rpubs.com/lindangulopez/656288)
 
 and [print to other graphic devices, like pdf](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/raw/master/Scripts/myplot.pdf)
 
