@@ -19,7 +19,7 @@ ggplot2 was used to explore a mouse	allergen	and	asthma	cohort	study of children
 
 ### [learn more about ggplot2 here, ...](https://rpubs.com/lindangulopez/662006)
 
- Also covered was:
+
  ## The Lattice Plotting System in R 
 -xyplot: this is the main function for creating scatterplots
 -bwplot: box-and-whiskers plots (“boxplots”)
