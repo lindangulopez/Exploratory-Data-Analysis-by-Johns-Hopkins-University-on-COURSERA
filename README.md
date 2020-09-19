@@ -56,8 +56,7 @@ To produce these [four PNG files and four R code files](https://github.com/linda
 ### [function Plot.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot1.R)
 
 
-![Figure 1: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/figure/plot1.png) 
-https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/figure/plot1.png
+![Figure 1: download link](https://raw.githubusercontent.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/master/ExData_Plotting1/figure/plot1.png)
 
 
 ### [function Plot2.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot2.R)
