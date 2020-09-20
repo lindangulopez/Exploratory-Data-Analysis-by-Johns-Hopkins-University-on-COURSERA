@@ -17,8 +17,9 @@ ggplot2 was used to explore a mouse	allergen	and	asthma	cohort	study of children
 ![library(ggthemes)](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/ggplot2_maacs_finalplot.png?raw=true)
 ![here's Prof.Roger Peng's Rcode](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/ggplot2_maacs_finalplot_code.png?raw=true)
 
-### [learn more about ggplot2 here, ...](https://rpubs.com/lindangulopez/662006)
 
+### [learn more about ggplot2 here, ...](https://rpubs.com/lindangulopez/662006)
+### [learn more about SVD here, ...](https://youtu.be/gXbThCXjZFM)
 
  ## The Lattice Plotting System in R 
 -xyplot: this is the main function for creating scatterplots
@@ -30,11 +31,11 @@ ggplot2 was used to explore a mouse	allergen	and	asthma	cohort	study of children
 -levelplot, contourplot: for plotting "image" data
 -[print to other graphic devices, like pdf](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/raw/master/Scripts/myplot.pdf)
 
-### the lattice system is easy to use and you can quickly produce multiple graphs by splitting the factors with the ![library("gridExtra")](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/latticeMPs.png?raw=true)
+### the lattice system is easy to use and you can quickly produce multiple graphs by splitting the factors with the library("gridExtra") for example: ![](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/latticeMPs.png?raw=true)
 
 ### [Learn more about the lattice plot system here, ...](https://rpubs.com/lindangulopez/661915) & [the base plot system here, ...](https://rpubs.com/lindangulopez/656288)
 
-### [Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, in the [first week](https://github.com/lindangulopez/ExData_Plotting1/tree/master/figure) used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption [Data Set](https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip)": Electric power consumption [20Mb]
+### [Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, in the first week ![](https://github.com/lindangulopez/ExData_Plotting1/tree/master/figure) used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption [Data Set](https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip)": Electric power consumption [20Mb]
 Description: Measurements of electric power consumption in one household with a one-minute sampling rate over a period of almost 4 years. Different electrical quantities and some sub-metering values are available. The following descriptions of the 9 variables in the dataset are taken from the UCI web site: https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption
 - Date: Date in format dd/mm/yyyy
 - Time: time in format hh:mm:ss
