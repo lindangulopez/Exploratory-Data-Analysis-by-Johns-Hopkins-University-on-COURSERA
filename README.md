@@ -89,4 +89,14 @@ To produce these [four PNG files and four R code files](https://github.com/linda
 
 ### [function Plot4.R](https://raw.githubusercontent.com/lindangulopez/ExData_Plotting1/master/plot4.R)
 
-![Figure 4: download link](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/ExData_Plotting1/plot4.png?raw=true) 
+![Figure 4: download link](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/ExData_Plotting1/plot4.png?raw=true)
+
+## Color in R:
+
+The [RColorBrewer Package](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/R_notebooks/ColorBrewer.ipynb) was first created for mapping, it contains interesting and useful color palettes, to show sequential, diverging and qualitative patterns, here are a few pallets, here's an example of colour manipulation:
+
+![](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/coloursinR_ggplot2.png?raw=true)
+
+[learn more about color in R here, ...](https://rpubs.com/lindangulopez/663321)
+
+
