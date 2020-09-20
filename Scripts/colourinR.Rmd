@@ -1,0 +1,300 @@
+---
+title: "Colours in R"
+author: "Linda Angulo Lopez"
+date: "20/09/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## colorRamp:
+
+```{r}
+ pal <- colorRamp(c("red", "blue"))
+red <- pal(0)
+blue <- pal(1)
+
+red; blue
+
+pal(seq(0, 1, len = 10))
+```
+
+
+## colorRampPalette:
+
+```{r}
+ pal <- colorRampPalette(c("red", "yellow"))
+#red=FF0000; green=FFFF00; blue=FFFFFF
+
+pal(10)
+```
+
+
+```{r}
+library(RColorBrewer)
+cols <- brewer.pal(100, "BuGn")
+pal <- colorRampPalette(cols)
+image(volcano, col = pal(15))
+ 
+```
+
+
+```{r}
+image(volcano)
+
+```
+
+```{r}
+x<- rnorm(1000)
+y<-(2*x-x) + rnorm(1000)
+smoothScatter(x,y)
+```
+
+```{r}
+
+x<- rnorm(500)
+y<-(2*x-x*x) + rnorm(150)
+plot(x,y,col=rgb(0,0,0,.2), pch=19)
+```
+
+
+
+## library(grDevices)
+
+
+```{r}
+library(RColorBrewer)
+cols <- brewer.pal(100, "BuGn")
+pal <- colorRampPalette(cols)
+image(volcano, col = pal(150))
+
+```
+
+```{r}
+cols <- brewer.pal(100, "Spectral")
+pal <- colorRampPalette(cols)
+image(volcano, col = pal(150))
+
+```
+## Colors (ggplot2)
+
+- use the colorblind-friendly palette 
+
+```{r}
+
+# Two variables
+df <- read.table(header=TRUE, text='
+ cond yval
+    A 2
+    B 2.5
+    C 1.6
+')
+
+# Three variables
+df2 <- read.table(header=TRUE, text='
+ cond1 cond2 yval
+    A      I 2
+    A      J 2.5
+    A      K 1.6
+    B      I 2.2
+    B      J 2.4
+    B      K 1.2
+    C      I 1.7
+    C      J 2.3
+    C      K 1.9
+')
+```
+
+- Simple color assignment
+
+```{r}
+
+library(ggplot2)
+# Default: dark bars
+ggplot(df, aes(x=cond, y=yval)) + geom_bar(stat="identity")
+# Bars with red outlines
+ggplot(df, aes(x=cond, y=yval)) + geom_bar(stat="identity", colour="#FF9999") 
+```
+
+
+
+```{r}
+
+# Red fill, black outlines
+ggplot(df, aes(x=cond, y=yval)) + geom_bar(stat="identity", fill="#FF9999", colour="black")
+
+```
+
+
+```{r}
+# Standard black lines and points
+ggplot(df, aes(x=cond, y=yval)) + 
+    geom_line(aes(group=1)) +     # Group all points; otherwise no line will show
+    geom_point(size=3)
+# Dark blue lines, red dots
+ggplot(df, aes(x=cond, y=yval)) + 
+    geom_line(aes(group=1), colour="#000099") +  # Blue lines
+    geom_point(size=3, colour="#CC0000")         # Red dots
+```
+
+Instead of changing colors globally, you can map variables to colors – in other words, make the color conditional on a variable, by putting it inside an aes() statement.
+
+
+```{r}
+# Bars: x and fill both depend on cond2
+ggplot(df, aes(x=cond, y=yval, fill=cond)) + geom_bar(stat="identity")
+
+```
+
+
+
+
+```{r}
+# Bars with other dataset; fill depends on cond2
+ggplot(df2, aes(x=cond1, y=yval)) + 
+    geom_bar(aes(fill=cond2),   # fill depends on cond2
+             stat="identity",
+             colour="black",    # Black outline for all
+             position=position_dodge()) # Put bars side-by-side instead of stacked
+
+
+```
+
+
+
+```{r}
+
+# Lines and points; colour depends on cond2
+ggplot(df2, aes(x=cond1, y=yval)) + 
+    geom_line(aes(colour=cond2, group=cond2)) + # colour, group both depend on cond2
+    geom_point(aes(colour=cond2),               # colour depends on cond2
+               size=3)                          # larger points, different shape
+## Equivalent to above; but move "colour=cond2" into the global aes() mapping
+# ggplot(df2, aes(x=cond1, y=yval, colour=cond2)) + 
+#    geom_line(aes(group=cond2)) +
+#    geom_point(size=3)
+
+```
+## A colorblind-friendly palette:
+
+
+```{r}
+# The palette with grey:
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+# The palette with black:
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# To use for fills, add
+  scale_fill_manual(values=cbPalette)
+
+# To use for line and point colors, add
+  scale_colour_manual(values=cbPalette)
+```
+
+```{r}
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) +
+    geom_point()
+```
+
+```{r}
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) +
+    geom_point() +
+    scale_color_manual(values=c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"))
+```
+
+
+```{r}
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) +
+    geom_point() +
+    scale_color_manual(values=c("Fair"="#E69F00", "Good"="#56B4E9", "Premium"="#009E73", "Ideal"="#F0E442", "Very Good"="#0072B2"))
+```
+
+## Setting luminance and saturation (chromaticity)
+```{r}
+# Use luminance=45, instead of default 65
+ggplot(df, aes(x=cond, y=yval, fill=cond)) + geom_bar(stat="identity") +
+    scale_fill_hue(l=40)
+
+
+```
+
+
+
+```{r}
+# Reduce saturation (chromaticity) from 100 to 50, and increase luminance
+ggplot(df, aes(x=cond, y=yval, fill=cond)) + geom_bar(stat="identity") +
+    scale_fill_hue(c=45, l=80)
+
+# Note: use scale_colour_hue() for lines and points
+
+```
+
+
+```{r}
+
+ggplot(df, aes(x=cond, y=yval, fill=cond)) + geom_bar(stat="identity") +
+    scale_fill_brewer()
+
+
+```
+
+
+
+
+```{r}
+
+ggplot(df, aes(x=cond, y=yval, fill=cond)) + geom_bar(stat="identity") +
+    scale_fill_brewer(palette="Set1")
+
+
+```
+
+
+```{r}
+
+ggplot(df, aes(x=cond, y=yval, fill=cond)) + geom_bar(stat="identity") +
+    scale_fill_brewer(palette="Spectral")
+
+# Note: use scale_colour_brewer() for lines and points
+```
+
+
+### Palettes: manually-defined
+```{r}
+ggplot(df, aes(x=cond, y=yval, fill=cond)) + geom_bar(stat="identity") + 
+    scale_fill_manual(values=c("red", "blue", "green"))
+
+
+```
+
+
+```{r}
+ggplot(df, aes(x=cond, y=yval, fill=cond)) + geom_bar(stat="identity") + 
+    scale_fill_manual(values=c("#CC6666", "#9999CC", "#66CC99"))
+
+# Note: use scale_colour_manual() for lines and points
+```
+
+## Continuous colors:
+
+```{r}
+# Generate some data
+set.seed(133)
+df <- data.frame(xval=rnorm(50), yval=rnorm(50))
+
+# Make color depend on yval
+ggplot(df, aes(x=xval, y=yval, colour=yval)) + geom_point()
+
+
+```
+
+```{r}
+# Use a different gradient
+ggplot(df, aes(x=xval, y=yval, colour=yval)) + geom_point() + 
+    scale_colour_gradientn(colours=rainbow(4))
+```
+
+[learn more](http://www.cookbook-r.com/Graphs/Colors_%28ggplot2%29/)
+
