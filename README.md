@@ -8,6 +8,20 @@ This course can be applied to multiple Specializations or Professional Certifica
 
 SKILLS YOU WILL GAIN: ` Cluster Analysis - Ggplot2 - R Programming - Exploratory Data Analysis `
 
+## [Cluster Analysis:](https://www.linkedin.com/pulse/grouping-data-exploration-r-linda-angulo-l%C3%B3pez/)
+
+When exploring data, there are two principal uses of grouping, (i) to point out groups of similar data, here the distance/similarity has to be chosen to match the problem and (ii) to create a set of variables which are uncorrelated but representative of the data, which would explain as much variance as possible, here the first goal is statistical, solved by PCA, and the second goal is data compression which can be solved by SVD.
+
+### Principal Components Analysis and Singular Value Decomposition, SVD in R:
+SVD tries to identify a relevant sub-space of all of the dimensions in the data, to simplify the data to important in determining groups. How “strong” an approximation is, is taken in perspective along with how important the features left in a particular dimension are, these “approximations” are calculated by the SVD algorithm to form what are known as “singular vectors” and “singular values.”
+
+For a given problem, if the vector v in x(x.v) optimizes to minimize the distance between the data and the projection it is known as the singular vector. The value of the data matrix multiplied by the vector is known as the singular value. It tells us how much of the data is approximated by the vector. By repeating this one dimensional process, we optimize to find the vector in the second dimension, and can take the span of {v1, v2} to create the 2 dimension approximation, and so forth until Av = 0, that is all data is treated. 
+
+[Here is an example with identifying a face in the image:](https://rpubs.com/lindangulopez/663234)
+![](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/SVD_PCA_7.png?raw=true)
+
+SVD is useful for both data exploration and in the final modeling phase, here we see a visualization of data grouping by PCA:
+
 There are three key plotting systems in R, the [Base](https://rpubs.com/lindangulopez/656288), which is a type of artist's palette, model,  a [Lattice System](http://rpubs.com/lindangulopez/661915), which allows to specify an entire plot specified by one function nd the Grammar	of	Graphics is the "third" graphics	system	for R and is available	from CRAN	via install.packages() 
 
  ## The Grammar of Graphics Plotting System in R 
