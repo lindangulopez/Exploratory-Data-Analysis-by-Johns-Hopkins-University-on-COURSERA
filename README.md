@@ -10,6 +10,8 @@ SKILLS YOU WILL GAIN: ` Cluster Analysis - Ggplot2 - R Programming - Exploratory
 
 There are three key plotting systems in R, the [Base](https://rpubs.com/lindangulopez/656288), which is a type of artist's palette, model,  a [Lattice System](http://rpubs.com/lindangulopez/661915), which allows to specify an entire plot specified by one function nd the Grammar	of	Graphics is the "third" graphics	system	for R and is available	from CRAN	via install.packages() 
 
+ ## The Grammar of Graphics Plotting System in R 
+
 ### “In	brief,	the	grammar	tells	us	that	a	statstcal graphic	is	a	mapping	from	data	to	aesthetc attributes	(colour,	shape,	size)	of	geometric objects	(points,	lines,	bars).	The	plot	may	also contain	statstcal	transforma:ons	of	the	data and	is	drawn	on	a	specific	coordinate	system”  [ggplot2 book](https://ggplot2-book.org/)
 
 ggplot2 was used to explore a mouse	allergen	and	asthma	cohort	study of children	(aged	5—17) with persistent	asthma, in the second week, data, up to 5 record per child, were collected over a year. [Extract of maacs data set](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/datasets/maacs.rda?raw=true) to produced and style muplitple plot and other graphs, with:
@@ -34,6 +36,8 @@ ggplot2 was used to explore a mouse	allergen	and	asthma	cohort	study of children
 ### the lattice system is easy to use and you can quickly produce multiple graphs by splitting the factors with the library("gridExtra") for example: ![](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/latticeMPs.png?raw=true)
 
 ### [Learn more about the lattice plot system here, ...](https://rpubs.com/lindangulopez/661915) & [the base plot system here, ...](https://rpubs.com/lindangulopez/656288)
+
+ ## The Basr Plotting System in R 
 
 ### [Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, in the first week ![](https://github.com/lindangulopez/ExData_Plotting1/tree/master/figure) used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption [Data Set](https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip)": Electric power consumption [20Mb]
 Description: Measurements of electric power consumption in one household with a one-minute sampling rate over a period of almost 4 years. Different electrical quantities and some sub-metering values are available. The following descriptions of the 9 variables in the dataset are taken from the UCI web site: https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption
