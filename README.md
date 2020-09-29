@@ -51,7 +51,7 @@ ggplot2 was used to explore a mouse	allergen	and	asthma	cohort	study of children
 
 ### [Learn more about the lattice plot system here, ...](https://rpubs.com/lindangulopez/661915) & [the base plot system here, ...](https://rpubs.com/lindangulopez/656288)
 
- ## The Basr Plotting System in R 
+ ## The Base Plotting System in R 
 
 ### [Base plotting on graphic devices](https://rpubs.com/lindangulopez/656565) was explored, in the first week ![](https://github.com/lindangulopez/ExData_Plotting1/tree/master/figure) used data from the UC Irvine Machine Learning Repository, the “Individual household electric power consumption [Data Set](https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip)": Electric power consumption [20Mb]
 Description: Measurements of electric power consumption in one household with a one-minute sampling rate over a period of almost 4 years. Different electrical quantities and some sub-metering values are available. The following descriptions of the 9 variables in the dataset are taken from the UCI web site: https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption
