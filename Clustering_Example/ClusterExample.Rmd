@@ -1,0 +1,177 @@
+---
+title: "clustering-case-study"
+author: "Linda Angulo Lopez"
+date: "29/09/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Get full data set here: [UCI's Center for Machine Learning and Intelligent Systems] (http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+
+ The study creating this database involved 30 volunteers "performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors. ... Each person performed six activities  ... wearing a smartphone (Samsung Galaxy S II) on the waist. ... The experiments have been video-recorded to label the data manually.  The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.
+
+- [used the training subset](https://github.com/jtleek/dataanalysis/blob/master/week4/001clusteringExample/index.md)
+
+```{r cars}
+load("C:/Users/angul/OneDrive/R/ExploreData/Data/samsungData.rda")
+names(samsungData)[1:12]
+table(samsungData$activity)
+```
+
+
+```{r}
+
+myplclust <- function( hclust, lab=hclust$labels, lab.col=rep(1,length(hclust$labels)), hang=0.1,...){
+ ## modifiction of plclust for plotting hclust objects *in colour*!
+ ## Copyright Eva KF Chan 2009
+ ## Arguments:
+ ##    hclust:    hclust object
+ ##    lab:        a character vector of labels of the leaves of the tree
+ ##    lab.col:    colour for the labels; NA=default device foreground colour
+ ##    hang:     as in hclust & plclust
+ ## Side effect:
+ ##    A display of hierarchical cluster with coloured leaf labels.
+ y <- rep(hclust$height,2)
+ x <- as.numeric(hclust$merge)
+ y <- y[which(x<0)]
+ x <- x[which(x<0)]
+ x <- abs(x)
+ y <- y[order(x)]
+ x <- x[order(x)]
+ plot( hclust, labels=FALSE, hang=hang, ... )
+ text( x=x, y=y[hclust$order]-(max(hclust$height)*hang), labels=lab[hclust$order], col=lab.col[hclust$order], srt=90, adj=c(1,0.5), xpd=NA, ... )}
+
+```
+
+## Plotting average acceleration for first subject Plotting average acceleration for first subject
+
+```{r}
+par(mfrow=c(1,2))
+numericActivity <- as.numeric(as.factor(samsungData$activity))[samsungData$subject==1]
+plot(samsungData[samsungData$subject==1,1],pch=19,col=numericActivity,ylab=names(samsungData)[1])
+plot(samsungData[samsungData$subject==1,2],pch=19,col=numericActivity,ylab=names(samsungData)[2])
+legend(150,-0.1,legend=unique(samsungData$activity),col=unique(numericActivity),pch=19)
+```
+
+Plotting average acceleration for first subject Plotting average acceleration for first subject does not show any clear patterns, the activities involving movement show more variation.
+
+## Clustering based just on average acceleration 
+
+```{r}
+
+source("myplclust.R")
+distanceMatrix <- dist(samsungData[samsungData$subject==1,1:3])
+hclustering <- hclust(distanceMatrix)
+myplclust(hclustering,lab.col=numericActivity)
+
+```
+
+The dendrogram is not very informative as the average acceleration feature does not seem to be able to discriminate between the six variables here.
+
+## Plotting max acceleration for the first subject Plotting max acceleration for the first subject
+
+```{r}
+par(mfrow=c(1,2))
+plot(samsungData[samsungData$subject==1,10],pch=19,col=numericActivity,ylab=names(samsungData)[10])
+plot(samsungData[samsungData$subject==1,11],pch=19,col=numericActivity,ylab=names(samsungData)[11])
+
+
+```
+here we see a separation of two type of actives, in movement (walk - walk down -walk up) & static (laying - sitting - standing). So we could 
+
+## cluster based on maximum acceleration
+
+```{r}
+distanceMatrix <- dist(samsungData[samsungData$subject==1,10:12])
+hclustering <- hclust(distanceMatrix)
+myplclust(hclustering,lab.col=numericActivity)
+```
+
+separation was done at Height = 1.25 into moving & not moving.
+
+# Singular value decomposition: 
+on the matrix, expect for the last two columns which identify the participants.
+
+
+```{r}
+svd1 = svd(scale(samsungData[samsungData$subject==1,-c(562,563)]))
+par(mfrow=c(1,2))
+plot(svd1$u[,1],col=numericActivity,pch=19)
+plot(svd1$u[,2],col=numericActivity,pch=19)
+```
+we see the same pattern as before in the first vector, the second vector groups data at the top, then it thins down except for the purple dots (walk up) so it could be ordering by change in altitude. So we can use the second right singular vector to see the feature which impacts the distribution the most. 
+
+## Find maximum contributor
+
+```{r}
+plot(svd1$v[,2],pch=19)
+
+```
+
+#New clustering with maximum contributer
+
+```{r}
+maxContrib <- which.max(svd1$v[,2])
+distanceMatrix <- dist(samsungData[samsungData$subject==1,c(10:12,maxContrib)])
+hclustering <- hclust(distanceMatrix)
+myplclust(hclustering,lab.col=numericActivity) 
+
+```
+maxContrib, separated the three movement activities.
+
+```{r}
+names(samsungData)[maxContrib] 
+
+```
+
+#K-means clustering (nstart=1, first try) K-means clustering (nstart=1, first try)
+
+```{r}
+kClust <- kmeans(samsungData[samsungData$subject==1,-c(562,563)],centers=6)
+table(kClust$cluster,samsungData$activity[samsungData$subject==1])
+```
+Cluster 3 is a mix of laying, sitting and standing, the rest are for single factors, repeating the clustering should give similar results.
+
+##K-means clustering (nstart=100, first try) K-means clustering (nstart=100, first try)
+
+```{r}
+kClust <- kmeans(samsungData[samsungData$subject==1,-c(562,563)],centers=6,nstart=100)
+table(kClust$cluster,samsungData$activity[samsungData$subject==1])
+
+```
+
+###K-means clustering (nstart=100, second try)
+
+```{r}
+kClust <- kmeans(samsungData[samsungData$subject==1,-c(562,563)],centers=6,nstart=100)
+table(kClust$cluster,samsungData$activity[samsungData$subject==1])
+```
+
+The second attempt gives better results, in both cases we did not specify the starting point so K-means choose a random point by default.
+
+#Cluster 1 Variable Centers (Laying) Cluster 1 Variable Centers (Laying)
+
+```{r}
+kClust <- kmeans(samsungData[samsungData$subject==1,-c(562,563)],centers=6,nstart=100)
+table(kClust$cluster,samsungData$activity[samsungData$subject==1])
+```
+so we see that walking down is cluster 6 & walking up is cluster 2, we can see can now use this to find the features that class the activity.
+
+```{r}
+plot(kClust$center[6,1:10],pch=19,ylab="Cluster Center",xlab="")
+
+```
+here we see of the 10 features plotted, features 1 & 10 are weigh more in clasifying walking down is very different, most features have 
+
+```{r}
+
+plot(kClust$center[2,1:10],pch=19,ylab="Cluster Center",xlab="")
+```
+
+moved up proportionally, expect for feature 7 and 10 which have dropped alot & feature 6 which shot up. These differences in patterns are useful for modeling. 
+
+[learn more](https://www.linkedin.com/pulse/grouping-data-exploration-r-linda-angulo-l%C3%B3pez/)
