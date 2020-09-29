@@ -20,7 +20,7 @@ For a given problem, if the vector v in x(x.v) optimizes to minimize the distanc
 [Here is an example with identifying a face in the image:](https://rpubs.com/lindangulopez/663234)
 ![](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/images/SVD_PCA_7.png?raw=true)
 
-SVD is useful for both [data exploration and in the final modeling phase]("https://rpubs.com/lindangulopez/668009"), here we see another example of clustering using the training set of the Human Activity Recognition Using Smartphones: Human Activity Recognition database built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors, `spoting these differences in patterns are useful for modeling.`
+SVD is useful for both [data exploration and in the final modeling phase](https://rpubs.com/lindangulopez/668009), here we see another example of clustering using the training set of the Human Activity Recognition Using Smartphones: Human Activity Recognition database built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors, `spoting these differences in patterns are useful for modeling.`
 
 There are three key plotting systems in R, the [Base](https://rpubs.com/lindangulopez/656288), which is a type of artist's palette, model,  a [Lattice System](http://rpubs.com/lindangulopez/661915), which allows to specify an entire plot specified by one function nd the Grammar	of	Graphics is the "third" graphics	system	for R and is available	from CRAN	via install.packages() 
 
