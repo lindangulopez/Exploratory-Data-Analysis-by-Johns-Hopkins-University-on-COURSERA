@@ -1,0 +1,207 @@
+---
+title: "PM25 clustering-case-study"
+author: "Linda Angulo Lopez"
+date: "29/09/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[get data](https://bookdown.org/rdpeng/exdata/)
+# RD|Action Code|State Code|County Code|Site ID|Parameter|POC|Sample Duration|Unit|Method|Date|Start Time|Sample Value|Null Data Code|Sampling Frequency|Monitor Protocol (MP) ID|Qualifier - 1|Qualifier - 2|Qualifier - 3|Qualifier - 4|Qualifier - 5|Qualifier - 6|Qualifier - 7|Qualifier - 8|Qualifier - 9|Qualifier - 10|Alternate Method Detectable Limit|Uncertainty
+# RC|Action Code|State Code|County Code|Site ID|Parameter|POC|Unit|Method|Year|Period|Number of Samples|Composite Type|Sample Value|Monitor Protocol (MP) ID|Qualifier - 1|Qualifier - 2|Qualifier - 3|Qualifier - 4|Qualifier - 5|Qualifier - 6|Qualifier - 7|Qualifier - 8|Qualifier - 9|Qualifier - 10|Alternate Method Detectable Limit|Uncertainty
+RD|I|01|027|0001|88101|1|7|105|120|19990103|00:00||AS|3|||||||||||||
+RD|I|01|027|0001|88101|1|7|105|120|19990106|00:00||AS|3|||||||||||||
+RD|I|01|027|0001|88101|1|7|105|120|19990109|00:00||AS|3|||||||||||||
+RD|I|01|027|0001|88101|1|7|105|120|19990112|00:00|8.841||3|||||||||||||
+RD|I|01|027|0001|88101|1|7|105|120|19990115|00:00|14.92||3|||||||||||||
+RD|I|01|027|0001|88101|1|7|105|120|19990118|00:00|3.878||3|||||||||||||
+
+## Read 1999 data: 
+
+```{r cars}
+library(readr)
+
+pm0 <- read_delim("data/RD_501_88101_1999-0.txt", 
+                   delim = "|",
+                  comment = "#", 
+                  col_names = FALSE, 
+                  na = "")
+```
+
+
+```{r}
+
+dim(pm0)
+head(pm0[, 1:13])
+cnames <- readLines("Data/RD_501_88101_1999-0.txt", 1)
+cnames <- strsplit(cnames, "|", fixed = TRUE)
+names(pm0) <- make.names(cnames[[1]]) 
+head(pm0[, 1:13])
+```
+
+## The column we are interested in is the Sample.Value column which contains the PM2.5 measurements. Here we extract that column and print a brief summary.
+
+```{r}
+x0 <- pm0$Sample.Value
+
+summary(x0)
+```
+
+
+## Clustering based just on average acceleration 
+
+```{r}
+## Are missing values important here?
+mean(is.na(x0))
+
+
+```
+
+
+
+## Read 2012 data:
+
+```{r}
+pm1 <- read_delim("Data/RD_501_88101_2012-0.txt", 
+                   comment = "#", 
+                   col_names = FALSE, 
+                   delim = "|", 
+                   na = "")
+
+
+```
+
+
+```{r}
+names(pm1) <- make.names(cnames[[1]])
+
+```
+
+
+Since we will be comparing the two years of data, it makes sense to combine them into a 
+## single data frame
+
+
+```{r}
+library(dplyr)
+pm <- rbind(pm0, pm1)
+
+```
+
+
+## Create a factor variable indicating which year the data comes from and rename the Sample.Value variable to a more sensible PM.
+
+```{r}
+pm <- mutate(pm, year = factor(rep(c(1999, 2012), c(nrow(pm0), nrow(pm1))))) %>% rename(PM = Sample.Value)
+
+```
+
+#Take a random sample: 
+
+In order to show aggregate changes in PM across the entire monitoring network, we can make boxplots of all monitor values in 1999 and 2012. Here, we take the log of the PM values to adjust for the skew in the data.
+```{r}
+library(ggplot2)
+
+## Take a random sample because it's faster
+set.seed(2015)
+idx <- sample(nrow(pm), 1000)
+qplot(year, log2(PM), data = pm[idx, ], geom = "boxplot")
+
+```
+
+
+## make some summaries of the two year’s worth data to get at actual numbers:
+
+```{r}
+with(pm, tapply(PM, year, summary))
+
+```
+
+# Check if negative values occur more often in some parts of the year than other parts: 
+
+```{r}
+library(lubridate)
+negative <- filter(pm, year == "2012") %>% 
+        mutate(negative = PM < 0, date = ymd(Date)) %>%
+        select(date, negative)
+
+
+```
+Cluster 3 is a mix of laying, sitting and standing, the rest are for single factors, repeating the clustering should give similar results.
+
+## Extract the month from each of the dates with negative values and attempt to identify when negative values occur most often.
+
+```{r}
+filter(pm, year == "2012") %>% summarize(negative = mean(PM < 0, na.rm = TRUE))
+
+mutate(negative, month = factor(month.name[month(date)], levels = month.name)) %>%
+         group_by(month) %>%
+         summarize(pct.negative = mean(negative, na.rm = TRUE) * 100)
+```
+
+The bulk of the negative values seem to occur in the first four months of the year (January–April)
+
+# Single monitor in New York State to see if PM levels at that monitor decreased from 1999 to 2012.
+
+Subset the data frames to only include data from New York (State.Code == 36) and only include the County.Code and the Site.ID (i.e. monitor number) variables.
+
+```{r}
+sites <- filter(pm, State.Code == 36) %>% select(County.Code, Site.ID, year) %>% unique
+
+sites <- mutate(sites, site.code = paste(County.Code, Site.ID, sep = "."))
+str(sites)
+```
+
+
+
+## Finally, we want the intersection between the sites present in 1999 and 2012 so that we might choose a monitor that has data in both periods.
+
+```{r}
+site.year <- with(sites, split(site.code, year))
+both <- intersect(site.year[[1]], site.year[[2]])
+print(both)
+```
+
+##choose one that had a reasonable amount of data in each year.
+
+```{r}
+count <- mutate(pm, site.code = paste(County.Code, Site.ID, sep = ".")) %>% 
+         filter(site.code %in% both)
+group_by(count, site.code) %>% summarize(n = n())
+
+```
+
+## Let's focus on County 63 and site ID 2008.
+
+```{r}
+
+pmsub <- filter(pm, State.Code == "36" & County.Code == "063" & Site.ID == "2008") %>%
+         select(Date, year, PM) %>%
+         mutate(Date = ymd(Date), yday = yday(Date))
+
+qplot(yday, PM, data = pmsub, facets = . ~ year, xlab = "Day of the year")
+```
+
+The variation (spread) in the PM values in 2012 is much smaller than it was in 1999. This suggest that not only are median levels of PM lower in 2012, but that there are fewer large spikes from day to day. 
+
+# Changes in state-wide PM levels: 
+This analysis falls somewhere in between looking at the entire country all at once and looking at an individual monitor.
+
+```{r}
+mn <- group_by(pm, year, State.Code) %>% summarize(PM = mean(PM, na.rm = TRUE))
+head(mn)
+
+qplot(xyear, PM, data = mutate(mn, xyear = as.numeric(as.character(year))), 
+       color = factor(State.Code), 
+       geom = c("point", "line"))
+
+```
+This plot needs a bit of work still, it's not easy to see by eye, it looks but that many states have decreased the average PM levels from 1999 to 2012, and a few states actually increased their levels ...
+
+
+
+
+
