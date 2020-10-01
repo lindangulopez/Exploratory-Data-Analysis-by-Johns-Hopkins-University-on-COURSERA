@@ -1,0 +1,342 @@
+---
+title: "PM2.5 US 1999 - 2008"
+author: "Linda Angulo Lopez"
+date: "30/09/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## [Assignment](https://www.coursera.org/learn/exploratory-data-analysis/peer/b5Ecl/course-project-2)
+The overall goal of this assignment is to explore the National Emissions Inventory database and see what it say about fine particulate matter pollution in the United states over the 10-year period 1999 to 2008. 
+
+- set up environment
+
+```{r}
+setwd("C:/Users/angul/OneDrive/R/ExploreData/Data")
+
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+```
+
+### Q1. Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008. Upload a PNG file containing your plot addressing this question.
+
+
+```{r}
+
+# emissions by year 
+total_emmissions <- aggregate(Emissions ~ year, NEI, sum)
+
+png("Q1_53pcdropspike.png", width=480, height=480)
+barplot(
+  (total_emmissions$Emissions)/10^6,
+  names.arg=total_emmissions$year,
+  xlab="Year",
+  ylab="PM2.5 Emissions (10^6 Tons)",
+  ylim = c(0, 7.5),
+  col="black", 
+  border="red",
+  main="53% PM2.5 emission drop from 1999 to 2008, over the USA")
+dev.off()
+
+print("Percent Total emissions change: ")
+pcdiff <- ((total_emmissions[4,2] - total_emmissions[1,2])/total_emmissions[1,2])*100
+print(pcdiff) 
+
+
+```
+
+`scratch space`
+```{r}
+
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+head(total_emmissions)
+totUS1999 <- total_emmissions[1,2]
+print("The total US PM2.5 emmissions in 1999 were:") 
+print(totUS1999, useSource=TRUE)
+totUS2008 <- total_emmissions[4,2]
+print("while that of 2008 sttod at:") 
+print(totUS2008, useSource=TRUE)
+difftotUS <- total_emmissions[1,2] - total_emmissions[4,2]
+pcdiff <- (total_emmissions[1,2] - total_emmissions[4,2])/total_emmissions[1,2]
+
+
+```
+
+### Q2. Have total emissions from PM2.5 decreased in the  Baltimore City, Maryland ( \color{red}{\verb|fips == 24510|}fips == 24510) from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
+
+```{r}
+
+setwd("C:/Users/angul/OneDrive/R/ExploreData/Data")
+
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+baltimore <- subset(NEI, fips=="24510")
+totPM25_Baltimore <- aggregate(Emissions ~ year, baltimore, sum)
+
+png("Q2_43dropBalt2015spike.png", width=480, height=480)
+barplot(
+  totPM25_Baltimore$Emissions,
+  names.arg=totPM25_Baltimore$year,
+  xlab="Year",
+  ylab="PM2.5 Emissions, in Tons",
+  ylim=c(0,3500),
+  col="black", 
+  border="red",
+  main="43% drop: despite 2005 spike in Baltimore City" )
+dev.off()
+
+pcdiffBalt <- (totPM25_Baltimore[1,2] - totPM25_Baltimore[4,2])/totPM25_Baltimore[1,2]
+print("Percent Total emissions change: ")
+print(pcdiffBalt)
+
+```
+
+
+
+`scratch space`
+```{r}
+head(totPM25_Baltimore)
+totBalt1999 <- totPM25_Baltimore[1,2]
+print("The total Baltimore PM2.5 emmissions in 1999 were:") 
+print(totBalt1999, useSource=TRUE)
+totBalt2008 <- totPM25_Baltimore[1,2]
+print("while that of 2008 stood at:") 
+print(totBalt2008, useSource=TRUE)
+difftotBalt <- totPM25_Baltimore[1,2] - totPM25_Baltimore[4,2]
+pcdiffBalt <- (totPM25_Baltimore[1,2] - totPM25_Baltimore[4,2])/totPM25_Baltimore[1,2]
+print("Percent Total emissions change: ")
+print(pcdiffBalt)
+
+
+```
+
+### Q3. Have total emissions from PM2.5 decreased in the  Baltimore City, Maryland ( \color{red}{\verb|fips == 24510|}fips == 24510) from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
+```{r}
+
+setwd("C:/Users/angul/OneDrive/R/ExploreData/Data")
+
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+tot_emi_24510_by_type <- NEI %>%
+        filter(fips == 24510) %>%
+        select(fips, type, Emissions, year) %>%
+        group_by(year, type) %>%
+        summarise(Total_Emissions = sum(Emissions, na.rm = TRUE))
+
+SourcePM25Baltimore <- ggplot(tot_emi_24510_by_type, aes(x = factor(year), y = Total_Emissions, fill = type)) +
+        geom_bar(stat = "identity") +
+        facet_grid(.~type) + 
+        labs(x = "Year", y = "PM2.5 emissions in Tons", title = "Sources of PM25 emissions in Baltimore City, 2019-2008")+
+        theme(plot.title = element_text(size = 14),
+              axis.title.x = element_text(size = 12),
+              axis.title.y = element_text(size = 12)) +
+        scale_fill_hue(c=45, l=80) +
+        theme_dark() +
+        ggsave("Q3_SourcePM25Baltimore.png", width = 25, height = 20, units = "cm")
+
+print(SourcePM25Baltimore)
+
+```
+
+
+`scratch space`
+```{r}
+head(tot_emi_24510_by_type)
+
+print("Nonpoint sources continue to pollute the most, even if PM2.5 emissions dropped, from 1999 to 2008. There was a peak in the point source, which indicates a pollution incident there in 2005. Both non-road & on_road sources are relatively low and have a downward trend ")
+
+```
+
+
+### Q4.Across the United States, how have emissions from coal combustion-related sources changed from 1999 to 2008?
+
+`[We have to filter the SCC data by coal in SCC Level 3 and combustion in SCC Level](https://www.cmascenter.org/smoke/documentation/2.7/html/ch02s03s05.html)`
+
+```{r}
+
+setwd("C:/Users/angul/OneDrive/R/ExploreData/Data")
+
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+#[We have to filter the SCC data by coal in SCC Level 3 and combustion in SCC Level](https://www.cmascenter.org/smoke/documentation/2.7/html/ch02s03s05.html)
+
+SCC_Coal_Comb <- SCC %>%
+        filter(grepl('[Cc]ombustion', SCC.Level.One)) %>%
+        filter(grepl("[Cc]oal", SCC.Level.Three)) %>%
+        select(SCC, SCC.Level.One, SCC.Level.Three)
+
+NEI_Coal_Comb <- inner_join(NEI, SCC_Coal_Comb, by = "SCC")
+
+NEICoalComb_Bar <- ggplot(NEI_Coal_Comb, aes(factor(year), Emissions)) +
+        geom_bar(stat = "identity", fill = "red" , width = 0.5, col= "black") + labs(x = "Year", 
+        y = " PM2.5 emissions in Tons", title = "US PM2.5 emissions, 1999 - 2008", 
+        subtitle = "from coal combustion" ) +
+        theme(plot.title = element_text(size = 14),
+              axis.title.x = element_text(size = 12),
+              axis.title.y = element_text(size = 12)) +
+        theme_dark() +
+        ggsave("Q4_NEICoalComb_Bar.png", width = 25, height = 20, units = "cm")
+        
+
+print(NEICoalComb_Bar)
+
+
+
+```
+
+`scratch space`
+
+```{r}
+summary(SCC_Coal_Comb)
+head(NEI_Coal_Comb)
+summary(NEI_Coal_Comb$Emissions)
+print("The Clean Air Act programs have lowered national concentrations of P2.5 from coal by over 2e+05 Tons between 1999 and 2008.")
+```
+
+
+
+### Q5.How have emissions from motor vehicle sources changed from 1999 to 2008 in Baltimore City?
+
+```{r}
+setwd("C:/Users/angul/OneDrive/R/ExploreData/Data")
+
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+SCC_Vehicles <- SCC %>%
+        filter(grepl('[Vv]ehicle', SCC.Level.Two)) %>%
+        select(SCC, SCC.Level.Two)
+
+Tot_Emi_24510_V <- NEI %>%
+        filter(fips == "24510") %>%
+        select(SCC, fips, Emissions, year) %>%
+        inner_join(SCC_Vehicles, by = "SCC") %>%
+        group_by(year) %>%
+        summarise(Total_Emissions = sum(Emissions, na.rm = TRUE)) %>%
+        select(Total_Emissions, year)
+
+BaltimoreVehicles_bar <- ggplot(Tot_Emi_24510_V, aes(factor(year), Total_Emissions)) +
+        geom_bar(stat = "identity", fill = "black", width = 0.5,
+        col="yellow") + labs(x = "Year", y = "PM2.5 emissions, in Tons", 
+        title = " PM2.5 emissions in Baltimore City, 1999-2008", 
+        subtitle = " from Vehicle related particulate emissions") +
+        theme(plot.title = element_text(size = 14),
+              axis.title.x = element_text(size = 12),
+              axis.title.y = element_text(size = 12)) +
+        ggsave("Q5_BaltimoreVehicles_bar.png", width = 25, height = 20, 
+        units = "cm")
+
+print(BaltimoreVehicles_bar)
+
+
+```
+`scratch space`
+
+```{r}
+head(Tot_Emi_24510_V)
+print("Motor vehicle emissions dropped from 404 in 1999 to 138 Tons in 2008, in Baltimore City.")
+
+```
+
+
+### Q6. Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (\color{red}{\verb|fips == 06037|} fips == 06037). Which city has seen greater changes over time in motor vehicle emissions?
+
+
+```{r}
+
+setwd("C:/Users/angul/OneDrive/R/ExploreData/Data")
+
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+
+SCC_Vehicles <- SCC %>%
+        filter(grepl('[Vv]ehicle', SCC.Level.Two)) %>%
+        select(SCC, SCC.Level.Two)
+
+Tot_Emi_Two_Locs <- NEI %>%
+        filter(fips == "24510" | fips == "06037") %>%
+        select(fips, SCC, Emissions, year) %>%
+        inner_join(SCC_Vehicles, by = "SCC") %>%
+        group_by(fips, year) %>%
+        summarise(Total_Emissions = sum(Emissions, na.rm = TRUE)) %>%
+        select(Total_Emissions, fips, year)
+
+Tot_Emi_Two_Locs$fips <- gsub("24510", "Baltimore City", Tot_Emi_Two_Locs$fips)
+Tot_Emi_Two_Locs$fips <- gsub("06037", "Los Angeles County", Tot_Emi_Two_Locs$fips)
+
+Vehicle_BaltLA_bar <- ggplot(Tot_Emi_Two_Locs, aes(x = factor(year), y = Total_Emissions, fill = fips )) +
+        geom_bar(stat = "identity", width = 0.7) +
+        facet_grid(.~fips) + 
+        labs(x = "Year", y = "PM2.5 emissions, in Tons", title = "Vehicle related PM2.5 emissions, 1999-2008") +
+        theme(plot.title = element_text(size = 14),
+              axis.title.x = element_text(size = 12),
+              axis.title.y = element_text(size = 12),
+              strip.text.x = element_text(size = 12)) +
+        scale_fill_hue(c=45, l=80) +
+        theme_dark() +      
+        ggsave("Q6_Vehicle_BaltLA_bar.png", width = 25, height = 20, units = "cm")
+
+print(Vehicle_BaltLA_bar)
+
+```
+
+`scratch space`
+
+```{r}
+print(summary(Tot_Emi_Two_Locs))
+Tot_Emi_Two_Locs
+
+```
+`scratch space`
+
+```{r}
+print((Tot_Emi_Two_Locs[4,1]/Tot_Emi_Two_Locs[8,1] +
+Tot_Emi_Two_Locs[3,1]/Tot_Emi_Two_Locs[7,1] +
+Tot_Emi_Two_Locs[2,1]/Tot_Emi_Two_Locs[6,1]+
+Tot_Emi_Two_Locs[1,1]/Tot_Emi_Two_Locs[5,1])/4)
+
+print("Vehicle related emission in Los Angeles County were on average 35 times that of Baltimore City, during the period 1999-2008")
+print("The change from 1999 to 2008 followed a steady downward trend  and resulted in a shift of: ")
+print(Tot_Emi_Two_Locs[5,1]-Tot_Emi_Two_Locs[8,1]) 
+print("in Baltimore City, while in Los Angeles County vehicle related emissions rose from 6110 to 7304 Tons from 1999 to 2005, then went down to 6421 Tons in 2008, this is an increase of: ")
+print(Tot_Emi_Two_Locs[1,1]-Tot_Emi_Two_Locs[4,1]) 
+print("311 Tons of vehicle related emissions")
+
+print("Vehicle related emission in Los Angeles County were on average 35 times that of Baltimore City, during the period 1999-2008. In Baltimore city there was a steady downward trend and resulted in a sheading of 266 Tons of PM2.5 emissions. While in Los Angeles County vehicle related emissions rose from 6110 to 7304 Tons from 1999 to 2005, then went down to 6421 Tons in 2008, this resulted in a net increase of 311 Tons of vehicle related emissions when comparing 1999 to 2008.")
+
+```
+
+[Get the full EPA report here](https://www.epa.gov/sites/production/files/2015-07/documents/fullrept.pdf)
