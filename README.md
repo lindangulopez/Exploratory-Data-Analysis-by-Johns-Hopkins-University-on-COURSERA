@@ -8,6 +8,10 @@ This course can be applied to multiple Specializations or Professional Certifica
 
 SKILLS YOU WILL GAIN: ` Cluster Analysis - Ggplot2 - R Programming - Exploratory Data Analysis `
 
+The final project was an exploration of the [National Emissions Inventory database](https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei) and see what it says about fine particulate matter pollution in the United states over the 10-year period 1999–2008. The most interesting finding is that the Clean Air Act programs have lowered national concentrations of P2.5 from coal by over 2e+05 Tons between 1999 and 2008, and the good news is that this trend has continued.
+
+![](https://github.com/lindangulopez/Exploratory-Data-Analysis-by-Johns-Hopkins-University-on-COURSERA/blob/master/Scripts/Q4_NEICoalComb_Bar.png?raw=true)
+
 ## [Cluster Analysis:](https://www.linkedin.com/pulse/grouping-data-exploration-r-linda-angulo-l%C3%B3pez/)
 
 When exploring data, there are two principal uses of grouping, (i) to point out groups of similar data, here the distance/similarity has to be chosen to match the problem and (ii) to create a set of variables which are uncorrelated but representative of the data, which would explain as much variance as possible, here the first goal is statistical, solved by PCA, and the second goal is data compression which can be solved by SVD.
